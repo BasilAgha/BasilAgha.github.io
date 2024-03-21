@@ -3,62 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AR Menu Demo</title>
-    <style>
-        #ar-view {
-            width: 100%;
-            height: 100vh;
-            background-color: #000;
-        }
-    </style>
-</head>
-<body>
-    <div id="ar-view"></div>
+    <title>AR Cube</title>
     <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
     <script src="https://cdn.rawgit.com/jeromeetienne/AR.js/2.0.8/aframe/build/aframe-ar.js"></script>
-    <script>
-        // Create an array to hold the 3D objects
-        const objects = [];
-
-        // Create and add multiple spheres to the scene
-        for (let i = 0; i < 3; i++) {
-            const geometry = new THREE.SphereGeometry(0.5, 32, 32);
-            const material = new THREE.MeshBasicMaterial({ color: Math.random() * 0xffffff });
-            const sphere = new THREE.Mesh(geometry, material);
-            sphere.position.x = i * 2 - 2; // Arrange spheres horizontally
-            objects.push(sphere); // Add sphere to objects array
-        }
-
-        // Set initial object index
-        let currentObjectIndex = 0;
-
-        // Function to switch to the next object
-        function nextObject() {
-            currentObjectIndex = (currentObjectIndex + 1) % objects.length;
-            updateARView();
-        }
-
-        // Function to switch to the previous object
-        function prevObject() {
-            currentObjectIndex = (currentObjectIndex - 1 + objects.length) % objects.length;
-            updateARView();
-        }
-
-        // Function to update the AR view with the current object
-        function updateARView() {
-            const sceneEl = document.querySelector('a-scene');
-            // Remove previous objects from the scene
-            sceneEl.querySelectorAll('.ar-object').forEach(el => el.parentNode.removeChild(el));
-            // Add current object to the scene
-            const currentObject = objects[currentObjectIndex].cloneNode(true);
-            currentObject.setAttribute('class', 'ar-object');
-            sceneEl.appendChild(currentObject);
-        }
-
-        // Set up event listeners for navigation buttons
-        // Modify these to use AR markers instead
-        document.getElementById("prev-btn").addEventListener("click", prevObject);
-        document.getElementById("next-btn").addEventListener("click", nextObject);
-    </script>
+</head>
+<body style="margin: 0;">
+    <a-scene embedded arjs="sourceType: webcam; debugUIEnabled: false;">
+        <a-marker-camera preset="hiro">
+            <a-box position="0 0.5 0" material="color: yellow;"></a-box>
+        </a-marker-camera>
+    </a-scene>
 </body>
 </html>
