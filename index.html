@@ -3,29 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Web AR Cube</title>
+    <title>Basic AR.js Target Scan</title>
     <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/AR-js-org/AR.js/aframe/build/aframe-ar-nft.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/AR-js-org/AR.js/aframe/build/aframe-ar.js"></script>
 </head>
 <body style="margin: 0; overflow: hidden;">
     <a-scene
         embedded
-        arjs="detectionMode: mono_and_matrix; matrixCodeType: 3x3;">
-        <a-nft
-            type="nft"
-            url="path/to/your-marker-file"
-            smooth="true"
-            smoothCount="10"
-            smoothTolerance=".01"
-            smoothThreshold="5">
-            <a-entity
-                position="0 0 0"
-                scale="0.5 0.5 0.5"
-                rotation="0 45 0"
-                geometry="primitive: box;"
-                material="color: #FF0000;">
-            </a-entity>
-        </a-nft>
+        arjs="sourceType: webcam; debugUIEnabled: false;">
+        <a-marker preset="hiro">
+            <!-- Content to display when the marker is detected -->
+            <a-box position="0 0.5 0" material="color: #4CC3D9;"></a-box>
+        </a-marker>
         <a-entity camera></a-entity>
     </a-scene>
 </body>
