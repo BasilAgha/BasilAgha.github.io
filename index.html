@@ -9,37 +9,28 @@
             width: 100%;
             height: 100vh;
             background-color: #000;
+            overflow: hidden;
         }
     </style>
 </head>
 <body>
     <div id="ar-view"></div>
-    <button id="prev-btn">Previous</button>
-    <button id="next-btn">Next</button>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/loaders/GLTFLoader.min.js"></script>
     <script>
         // Initialize Three.js scene
         const scene = new THREE.Scene();
-        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 100);
         const renderer = new THREE.WebGLRenderer();
         renderer.setSize(window.innerWidth, window.innerHeight);
         document.getElementById("ar-view").appendChild(renderer.domElement);
 
-        // Create an array to hold the 3D objects
-        const objects = [];
-
-        // Create and add multiple spheres to the scene
-        for (let i = 0; i < 3; i++) {
-            const geometry = new THREE.SphereGeometry(0.5, 32, 32);
-            const material = new THREE.MeshBasicMaterial({ color: Math.random() * 0xffffff });
-            const sphere = new THREE.Mesh(geometry, material);
-            sphere.position.x = i * 2 - 2; // Arrange spheres horizontally
-            scene.add(sphere);
-            objects.push(sphere); // Add sphere to objects array
-        }
-
-        // Set initial object index
-        let currentObjectIndex = 0;
+        // Load 3D model using GLTFLoader
+        const loader = new THREE.GLTFLoader();
+        loader.load('path/to/your/3d/model.glb', (gltf) => {
+            const model = gltf.scene;
+            scene.add(model);
+        });
 
         // Position the camera
         camera.position.z = 5;
@@ -52,30 +43,6 @@
 
         // Animate the scene
         animate();
-
-        // Function to switch to the next object
-        function nextObject() {
-            currentObjectIndex = (currentObjectIndex + 1) % objects.length;
-            updateARView();
-        }
-
-        // Function to switch to the previous object
-        function prevObject() {
-            currentObjectIndex = (currentObjectIndex - 1 + objects.length) % objects.length;
-            updateARView();
-        }
-
-        // Function to update the AR view with the current object
-        function updateARView() {
-            // Clear previous object from the scene
-            scene.remove.apply(scene, objects);
-            // Add current object to the scene
-            scene.add(objects[currentObjectIndex]);
-        }
-
-        // Set up event listeners for navigation buttons
-        document.getElementById("prev-btn").addEventListener("click", prevObject);
-        document.getElementById("next-btn").addEventListener("click", nextObject);
 
         // Handle window resize
         window.addEventListener('resize', () => {
