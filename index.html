@@ -14,41 +14,25 @@
     </style>
 </head>
 <body>
-    <div id="ar-view"></div>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/loaders/GLTFLoader.min.js"></script>
+    <div id="ar-view">
+        <a-scene embedded arjs>
+            <a-marker preset="hiro">
+                <a-box position='0 0.5 0' material='color: yellow;'></a-box>
+            </a-marker>
+            <a-entity camera></a-entity>
+        </a-scene>
+    </div>
+    <button id="prev-btn">Previous</button>
+    <button id="next-btn">Next</button>
+
+    <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
+    <script src="https://cdn.rawgit.com/jeromeetienne/AR.js/2.0.8/aframe/build/aframe-ar.js"></script>
     <script>
-        // Initialize Three.js scene
-        const scene = new THREE.Scene();
-        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 100);
-        const renderer = new THREE.WebGLRenderer();
-        renderer.setSize(window.innerWidth, window.innerHeight);
-        document.getElementById("ar-view").appendChild(renderer.domElement);
-
-        // Load 3D model using GLTFLoader
-        const loader = new THREE.GLTFLoader();
-        loader.load('path/to/your/3d/model.glb', (gltf) => {
-            const model = gltf.scene;
-            scene.add(model);
-        });
-
-        // Position the camera
-        camera.position.z = 5;
-
-        // Function to animate the scene
-        function animate() {
-            requestAnimationFrame(animate);
-            renderer.render(scene, camera);
-        }
-
-        // Animate the scene
-        animate();
-
         // Handle window resize
         window.addEventListener('resize', () => {
-            camera.aspect = window.innerWidth / window.innerHeight;
-            camera.updateProjectionMatrix();
-            renderer.setSize(window.innerWidth, window.innerHeight);
+            const arView = document.getElementById('ar-view');
+            arView.style.width = window.innerWidth + 'px';
+            arView.style.height = window.innerHeight + 'px';
         });
     </script>
 </body>
