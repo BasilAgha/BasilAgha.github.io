@@ -14,9 +14,38 @@
         arjs="sourceType: webcam; debugUIEnabled: false;">
         <a-marker preset="hiro">
             <!-- Content to display when the marker is detected -->
-            <a-box position="0 0.5 0" material="color: #4CC3D9;"></a-box>
+            <a-entity id="objectContainer"></a-entity>
         </a-marker>
+        <!-- Button to switch between cube and sphere -->
+        <button onclick="toggleObject()">Toggle Object</button>
         <a-entity camera></a-entity>
     </a-scene>
+
+    <script>
+        let isCube = true;
+
+        function toggleObject() {
+            const objectContainer = document.getElementById('objectContainer');
+            if (isCube) {
+                // Remove existing object (cube)
+                objectContainer.innerHTML = '';
+                // Add sphere
+                const sphere = document.createElement('a-sphere');
+                sphere.setAttribute('radius', '0.5');
+                sphere.setAttribute('material', 'color: #FFC65D');
+                objectContainer.appendChild(sphere);
+                isCube = false;
+            } else {
+                // Remove existing object (sphere)
+                objectContainer.innerHTML = '';
+                // Add cube
+                const cube = document.createElement('a-box');
+                cube.setAttribute('position', '0 0.5 0');
+                cube.setAttribute('material', 'color: #4CC3D9');
+                objectContainer.appendChild(cube);
+                isCube = true;
+            }
+        }
+    </script>
 </body>
 </html>
