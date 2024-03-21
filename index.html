@@ -4,36 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AR Menu Demo</title>
-    <style>
-        #ar-view {
-            width: 100%;
-            height: 100vh;
-            background-color: #000;
-            overflow: hidden;
-        }
-    </style>
-</head>
-<body>
-    <div id="ar-view">
-        <a-scene embedded arjs>
-            <a-marker preset="hiro">
-                <a-box position='0 0.5 0' material='color: yellow;'></a-box>
-            </a-marker>
-            <a-entity camera></a-entity>
-        </a-scene>
-    </div>
-    <button id="prev-btn">Previous</button>
-    <button id="next-btn">Next</button>
-
     <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
     <script src="https://cdn.rawgit.com/jeromeetienne/AR.js/2.0.8/aframe/build/aframe-ar.js"></script>
-    <script>
-        // Handle window resize
-        window.addEventListener('resize', () => {
-            const arView = document.getElementById('ar-view');
-            arView.style.width = window.innerWidth + 'px';
-            arView.style.height = window.innerHeight + 'px';
-        });
-    </script>
+</head>
+<body>
+    <a-scene embedded arjs>
+        <a-marker preset="hiro">
+            <a-box position="0 0.5 0" material="color: yellow;"></a-box>
+        </a-marker>
+        <a-entity camera></a-entity>
+    </a-scene>
 </body>
 </html>
