@@ -1,4 +1,3 @@
-@ -0,0 +1,88 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -15,17 +14,9 @@
 </head>
 <body>
     <div id="ar-view"></div>
-    <button id="prev-btn">Previous</button>
-    <button id="next-btn">Next</button>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
+    <script src="https://cdn.rawgit.com/jeromeetienne/AR.js/2.0.8/aframe/build/aframe-ar.js"></script>
     <script>
-        // Initialize Three.js scene
-        const scene = new THREE.Scene();
-        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-        const renderer = new THREE.WebGLRenderer();
-        renderer.setSize(window.innerWidth, window.innerHeight);
-        document.getElementById("ar-view").appendChild(renderer.domElement);
-
         // Create an array to hold the 3D objects
         const objects = [];
 
@@ -35,24 +26,11 @@
             const material = new THREE.MeshBasicMaterial({ color: Math.random() * 0xffffff });
             const sphere = new THREE.Mesh(geometry, material);
             sphere.position.x = i * 2 - 2; // Arrange spheres horizontally
-            scene.add(sphere);
             objects.push(sphere); // Add sphere to objects array
         }
 
         // Set initial object index
         let currentObjectIndex = 0;
-
-        // Position the camera
-        camera.position.z = 5;
-
-        // Function to animate the scene
-        function animate() {
-            requestAnimationFrame(animate);
-            renderer.render(scene, camera);
-        }
-
-        // Animate the scene
-        animate();
 
         // Function to switch to the next object
         function nextObject() {
@@ -68,22 +46,19 @@
 
         // Function to update the AR view with the current object
         function updateARView() {
-            // Clear previous object from the scene
-            scene.remove.apply(scene, objects);
+            const sceneEl = document.querySelector('a-scene');
+            // Remove previous objects from the scene
+            sceneEl.querySelectorAll('.ar-object').forEach(el => el.parentNode.removeChild(el));
             // Add current object to the scene
-            scene.add(objects[currentObjectIndex]);
+            const currentObject = objects[currentObjectIndex].cloneNode(true);
+            currentObject.setAttribute('class', 'ar-object');
+            sceneEl.appendChild(currentObject);
         }
 
         // Set up event listeners for navigation buttons
+        // Modify these to use AR markers instead
         document.getElementById("prev-btn").addEventListener("click", prevObject);
         document.getElementById("next-btn").addEventListener("click", nextObject);
-
-        // Handle window resize
-        window.addEventListener('resize', () => {
-            camera.aspect = window.innerWidth / window.innerHeight;
-            camera.updateProjectionMatrix();
-            renderer.setSize(window.innerWidth, window.innerHeight);
-        });
     </script>
 </body>
 </html>
