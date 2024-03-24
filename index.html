@@ -15,26 +15,26 @@
         <button id="arButton">View in AR</button>
     </div>
 
-    <!-- AR scene -->
-    <a-scene embedded arjs="sourceType: webcam;">
-        <!-- AR content will be displayed here -->
-    </a-scene>
-
     <script>
-        // JavaScript code to handle button click and AR display
         document.getElementById("arButton").addEventListener("click", function() {
-            displayAR();
-        });
+            // Remove existing AR scene if it exists
+            var existingScene = document.querySelector("a-scene");
+            if (existingScene) {
+                existingScene.parentNode.removeChild(existingScene);
+            }
 
-        function displayAR() {
-            // Code to display the AR content (e.g., load 3D model)
-            // Example:
-            var scene = document.querySelector("a-scene");
+            // Create new AR scene
+            var scene = document.createElement("a-scene");
+            scene.setAttribute("embedded", "");
+            scene.setAttribute("arjs", "sourceType: webcam;");
+            document.body.appendChild(scene);
+
+            // Load AR content
             var model = document.createElement("a-entity");
             model.setAttribute("gltf-model", "url(path/to/your/model.glb)");
             model.setAttribute("scale", "0.05 0.05 0.05");
             scene.appendChild(model);
-        }
+        });
     </script>
 </body>
 </html>
