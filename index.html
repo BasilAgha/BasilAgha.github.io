@@ -3,20 +3,38 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Basic AR.js Target Scan</title>
-    <script src="https://cdn.jsdelivr.net/gh/AR-js-org/AR.js/aframe/build/aframe-ar.js"></script>
-</head>
-<body style="margin: 0; overflow: hidden;">
+    <title>AR Menu</title>
+    <!-- Include necessary libraries and stylesheets -->
     <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/AR-js-org/AR.js/aframe/build/aframe-ar.js"></script>
-    <a-scene
-        embedded
-        arjs="sourceType: webcam; debugUIEnabled: false;">
-        <a-marker preset="hiro">
-            <!-- Content to display when the marker is detected -->
-            <a-box position="0 0.5 0" material="color: #4CC3D9;"></a-box>
-        </a-marker>
-        <a-entity camera></a-entity>
+    <script src="https://cdn.rawgit.com/jeromeetienne/AR.js/2.0.8/aframe/build/aframe-ar.js"></script>
+</head>
+<body>
+    <h1>AR Menu</h1>
+    <div id="menu">
+        <img src="image.jpg" alt="Object Image" width="200">
+        <button id="arButton">View in AR</button>
+    </div>
+
+    <!-- AR scene -->
+    <a-scene embedded arjs="sourceType: webcam;">
+        <!-- AR content will be displayed here -->
     </a-scene>
+
+    <script>
+        // JavaScript code to handle button click and AR display
+        document.getElementById("arButton").addEventListener("click", function() {
+            displayAR();
+        });
+
+        function displayAR() {
+            // Code to display the AR content (e.g., load 3D model)
+            // Example:
+            var scene = document.querySelector("a-scene");
+            var model = document.createElement("a-entity");
+            model.setAttribute("gltf-model", "url(path/to/your/model.glb)");
+            model.setAttribute("scale", "0.05 0.05 0.05");
+            scene.appendChild(model);
+        }
+    </script>
 </body>
 </html>
