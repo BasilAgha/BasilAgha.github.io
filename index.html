@@ -3,31 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
-    <title>Three.js Cube with Camera Background</title>
+    <title>Three.js Cube</title>
     <style>
         body { margin: 0; }
         canvas { display: block; }
         .button-container {
-            width: 100px;
-            height: 100px;
+            width: 100px; /* Adjust container width as needed */
+            height: 100px; /* Adjust container height as needed */
             overflow: hidden;
             position: relative;
         }
         #openSceneButton {
-            width: 100%;
-            height: 100%;
+            width: 100%; /* Ensure image fills container */
+            height: 100%; /* Ensure image fills container */
             position: absolute;
             top: 0;
             left: 0;
         }
-        video { display: none; }
     </style>
 </head>
 <body>
     <div class="button-container">
         <img id="openSceneButton" src="ButtonImage.png" alt="Open Scene">
-    </div>
-    <video id="video"></video> <!-- Hidden video element for the camera stream -->
+    </div> <!-- Container for the button image -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script src="OrbitControls.js"></script>
     <script>
@@ -37,12 +35,9 @@
         let controls;
 
         // Initialization function
-        async function init() {
+        function init() {
             // Create scene
             scene = new THREE.Scene();
-
-            // Set up the camera background with the video feed
-            await setupCameraBackground();
 
             // Create camera
             camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
@@ -53,65 +48,36 @@
             renderer.setSize(window.innerWidth, window.innerHeight);
             document.body.appendChild(renderer.domElement);
 
+            // Set the scene background to match the camera's render target
+            scene.background = new THREE.Color(0xffffff);
+
             // Create cube
             const geometry = new THREE.BoxGeometry();
-            const material = new THREE.MeshBasicMaterial({ color: 0xff0000 });
+            const material = new THREE.MeshBasicMaterial({ color: 0xff0000  });
             cube = new THREE.Mesh(geometry, material);
-            cube.rotation.y = Math.PI / 4; // Set initial rotation of the cube
+            cube.rotation.y = Math.PI / 4; // 45 degrees in radians
             scene.add(cube);
 
             // Add controls
             controls = new THREE.OrbitControls(camera, renderer.domElement);
-            controls.addEventListener('change', render); // Update the scene on control changes
-
-            render(); // Initially render the scene
-        }
-
-        // Setup camera background
-        async function setupCameraBackground() {
-            try {
-                const constraints = {
-                    video: {
-                        facingMode: "environment",
-                        width: { ideal: 640 }, // Reduced resolution
-                        height: { ideal: 480 }  // Reduced resolution
-                    }
-                };
-                const stream = await navigator.mediaDevices.getUserMedia(constraints);
-                const video = document.getElementById('video');
-                video.srcObject = stream;
-                await video.play();
-                const texture = new THREE.VideoTexture(video);
-                texture.minFilter = THREE.LinearFilter;
-                texture.magFilter = THREE.LinearFilter;
-                texture.format = THREE.RGBFormat;
-                texture.generateMipmaps = false;
-                texture.needsUpdate = true;
-
-                scene.background = texture;
-
-                // Update the texture less frequently to reduce load
-                setInterval(() => {
-                    texture.needsUpdate = true;
-                }, 100); // Update every 100 milliseconds
-            } catch (error) {
-                console.error('Error accessing the camera', error);
-                // Implement any fallback logic here
-            }
+            controls.addEventListener('change', render); // Listen for control changes
         }
 
         // Render function
         function render() {
+            // Render the scene
             renderer.render(scene, camera);
         }
 
         // Open scene function
         function openScene() {
             init(); // Initialize the scene
+            render(); // Render the scene
         }
 
-        // Add event listener to the image for opening the scene
+        // Add event listener to the image
         document.getElementById("openSceneButton").addEventListener("click", openScene);
+
     </script>
 </body>
 </html>
