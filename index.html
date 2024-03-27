@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+    <title>Three.js Cube</title>
+    <style>
+        body { margin: 0; }
+        canvas { display: block; }
+        .button-container {
+            width: 100px; /* Adjust container width as needed */
+            height: 100px; /* Adjust container height as needed */
+            overflow: hidden;
+            position: relative;
+        }
+        #openSceneButton {
+            width: 100%; /* Ensure image fills container */
+            height: 100%; /* Ensure image fills container */
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="button-container">
+        <img id="openSceneButton" src="ButtonImage.png" alt="Open Scene">
+    </div> <!-- Container for the button image -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="OrbitControls.js"></script>
+    <script>
+        // Variables
+        let camera, scene, renderer;
+        let cube;
+        let controls;
+
+        // Initialization function
+        function init() {
+            // Create scene
+            scene = new THREE.Scene();
+
+            // Create camera
+            camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+            camera.position.z = 5;
+
+            // Create renderer
+            renderer = new THREE.WebGLRenderer();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            document.body.appendChild(renderer.domElement);
+
+            // Set the scene background to match the camera's render target
+            scene.background = new THREE.Color(0xffffff);
+
+            // Create cube
+            const geometry = new THREE.BoxGeometry();
+            const material = new THREE.MeshBasicMaterial({ color: 0xff0000  });
+            cube = new THREE.Mesh(geometry, material);
+            cube.rotation.y = Math.PI / 4; // 45 degrees in radians
+            scene.add(cube);
+
+            // Add controls
+            controls = new THREE.OrbitControls(camera, renderer.domElement);
+            controls.addEventListener('change', render); // Listen for control changes
+        }
+
+        // Render function
+        function render() {
+            // Render the scene
+            renderer.render(scene, camera);
+        }
+
+        // Open scene function
+        function openScene() {
+            init(); // Initialize the scene
+            render(); // Render the scene
+        }
+
+        // Add event listener to the image
+        document.getElementById("openSceneButton").addEventListener("click", openScene);
+
+    </script>
+</body>
+</html>
