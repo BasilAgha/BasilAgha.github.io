@@ -17,7 +17,7 @@
         scene.background = new THREE.Color(0xffffff);
 
         const loader = new THREE.GLTFLoader();
-        loader.load('<your_model_url>', function(gltf) {
+        loader.load(scene.gltf, function(gltf) {
             scene.add(gltf.scene);
             render(); // You might want to call render() here to ensure the scene is rendered after the model loads
         }, undefined, function(error) {
