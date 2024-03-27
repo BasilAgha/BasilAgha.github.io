@@ -3,29 +3,33 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
-    <title>Three.js Cube</title>
+    <title>Three.js Cube with Camera Background</title>
     <style>
         body { margin: 0; }
         canvas { display: block; }
         .button-container {
-            width: 100px; /* Adjust container width as needed */
-            height: 100px; /* Adjust container height as needed */
+            width: 100px;
+            height: 100px;
             overflow: hidden;
             position: relative;
         }
         #openSceneButton {
-            width: 100%; /* Ensure image fills container */
-            height: 100%; /* Ensure image fills container */
+            width: 100%;
+            height: 100%;
             position: absolute;
             top: 0;
             left: 0;
+        }
+        video {
+            display: none;
         }
     </style>
 </head>
 <body>
     <div class="button-container">
         <img id="openSceneButton" src="ButtonImage.png" alt="Open Scene">
-    </div> <!-- Container for the button image -->
+    </div>
+    <video id="video"></video> <!-- Hidden video element for the camera stream -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script src="OrbitControls.js"></script>
     <script>
@@ -35,9 +39,12 @@
         let controls;
 
         // Initialization function
-        function init() {
+        async function init() {
             // Create scene
             scene = new THREE.Scene();
+
+            // Set up the camera background with the video feed
+            await setupCameraBackground();
 
             // Create camera
             camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
@@ -48,12 +55,9 @@
             renderer.setSize(window.innerWidth, window.innerHeight);
             document.body.appendChild(renderer.domElement);
 
-            // Set the scene background to match the camera's render target
-            scene.background = new THREE.Color(0xffffff);
-
             // Create cube
             const geometry = new THREE.BoxGeometry();
-            const material = new THREE.MeshBasicMaterial({ color: 0xff0000  });
+            const material = new THREE.MeshBasicMaterial({ color: 0xff0000 });
             cube = new THREE.Mesh(geometry, material);
             cube.rotation.y = Math.PI / 4; // 45 degrees in radians
             scene.add(cube);
@@ -65,19 +69,29 @@
 
         // Render function
         function render() {
-            // Render the scene
             renderer.render(scene, camera);
         }
 
         // Open scene function
         function openScene() {
-            init(); // Initialize the scene
-            render(); // Render the scene
+            init().then(render); // Initialize and render the scene
+        }
+
+        // Setup camera background
+        async function setupCameraBackground() {
+            const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+            const video = document.getElementById('video');
+            video.srcObject = stream;
+            await video.play();
+            const texture = new THREE.VideoTexture(video);
+            texture.minFilter = THREE.LinearFilter;
+            texture.magFilter = THREE.LinearFilter;
+            texture.format = THREE.RGBFormat;
+            scene.background = texture;
         }
 
         // Add event listener to the image
         document.getElementById("openSceneButton").addEventListener("click", openScene);
-
     </script>
 </body>
 </html>
