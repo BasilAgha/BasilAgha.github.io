@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
-    <title>Three.js Cube with Camera Background</title>
+    <title>Three.js Scene with Simulated Blur Effect</title>
     <style>
         body { margin: 0; }
         canvas { display: block; }
@@ -20,9 +20,7 @@
             top: 0;
             left: 0;
         }
-        video {
-            display: none;
-        }
+        video { display: none; } /* Hide the video element */
     </style>
 </head>
 <body>
@@ -35,7 +33,7 @@
     <script>
         // Variables
         let camera, scene, renderer;
-        let cube;
+        let cube, plane; // Include a plane for the blur effect
         let controls;
 
         // Initialization function
@@ -55,34 +53,31 @@
             renderer.setSize(window.innerWidth, window.innerHeight);
             document.body.appendChild(renderer.domElement);
 
+            // Create a transparent plane to simulate the blur effect
+            const planeGeometry = new THREE.PlaneGeometry(70, 40); // Size may need adjustment
+            const planeMaterial = new THREE.MeshBasicMaterial({ color: 0xffffff, opacity: 0.5, transparent: true });
+            plane = new THREE.Mesh(planeGeometry, planeMaterial);
+            plane.position.z = -5; // Position in front of the background
+            scene.add(plane);
+
             // Create cube
             const geometry = new THREE.BoxGeometry();
             const material = new THREE.MeshBasicMaterial({ color: 0xff0000 });
             cube = new THREE.Mesh(geometry, material);
-            cube.rotation.y = Math.PI / 4; // Set initial rotation of the cube
+            cube.rotation.y = Math.PI / 4; // Initial rotation of the cube
             scene.add(cube);
 
             // Add controls
             controls = new THREE.OrbitControls(camera, renderer.domElement);
-            controls.addEventListener('change', render); // Update the scene on control changes
-        }
+            controls.addEventListener('change', render); // Listen for control changes
 
-        // Render function
-        function render() {
-            renderer.render(scene, camera);
-        }
-
-        // Open scene function
-        function openScene() {
-            init().then(render); // Initialize and render the scene
+            render(); // Render the scene initially
         }
 
         // Setup camera background
         async function setupCameraBackground() {
             try {
-                const constraints = {
-                    video: { facingMode: "environment" } // Preference for rear camera
-                };
+                const constraints = { video: { facingMode: "environment" } }; // Preference for rear camera
                 const stream = await navigator.mediaDevices.getUserMedia(constraints);
                 const video = document.getElementById('video');
                 video.srcObject = stream;
@@ -94,8 +89,18 @@
                 scene.background = texture;
             } catch (error) {
                 console.error('Error accessing the camera', error);
-                // Implement any fallback logic here, e.g., setting a default background
+                // Implement fallback logic here, e.g., setting a default background
             }
+        }
+
+        // Render function
+        function render() {
+            renderer.render(scene, camera);
+        }
+
+        // Open scene function
+        function openScene() {
+            init(); // Initialize the scene
         }
 
         // Add event listener to the image for opening the scene
