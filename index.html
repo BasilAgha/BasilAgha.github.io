@@ -20,9 +20,7 @@
             top: 0;
             left: 0;
         }
-        video {
-            display: none;
-        }
+        video { display: none; }
     </style>
 </head>
 <body>
@@ -65,23 +63,19 @@
             // Add controls
             controls = new THREE.OrbitControls(camera, renderer.domElement);
             controls.addEventListener('change', render); // Update the scene on control changes
-        }
 
-        // Render function
-        function render() {
-            renderer.render(scene, camera);
-        }
-
-        // Open scene function
-        function openScene() {
-            init().then(render); // Initialize and render the scene
+            render(); // Initially render the scene
         }
 
         // Setup camera background
         async function setupCameraBackground() {
             try {
                 const constraints = {
-                    video: { facingMode: "environment" } // Preference for rear camera
+                    video: {
+                        facingMode: "environment",
+                        width: { ideal: 640 }, // Reduced resolution
+                        height: { ideal: 480 }  // Reduced resolution
+                    }
                 };
                 const stream = await navigator.mediaDevices.getUserMedia(constraints);
                 const video = document.getElementById('video');
@@ -91,11 +85,29 @@
                 texture.minFilter = THREE.LinearFilter;
                 texture.magFilter = THREE.LinearFilter;
                 texture.format = THREE.RGBFormat;
+                texture.generateMipmaps = false;
+                texture.needsUpdate = true;
+
                 scene.background = texture;
+
+                // Update the texture less frequently to reduce load
+                setInterval(() => {
+                    texture.needsUpdate = true;
+                }, 100); // Update every 100 milliseconds
             } catch (error) {
                 console.error('Error accessing the camera', error);
-                // Implement any fallback logic here, e.g., setting a default background
+                // Implement any fallback logic here
             }
+        }
+
+        // Render function
+        function render() {
+            renderer.render(scene, camera);
+        }
+
+        // Open scene function
+        function openScene() {
+            init(); // Initialize the scene
         }
 
         // Add event listener to the image for opening the scene
