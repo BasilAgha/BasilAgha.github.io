@@ -14,6 +14,9 @@
     <script src="OrbitControls.js"></script>
     <script src="GLTFLoader.js"></script> <!-- Add GLTFLoader script -->
     <script>
+        console.log("THREE.GLTFLoader:", THREE.GLTFLoader); // Check if THREE.GLTFLoader is defined
+        console.log("Type of THREE.GLTFLoader:", typeof THREE.GLTFLoader); // Check the type of THREE.GLTFLoader
+
         let camera, scene, renderer;
         let controls;
 
@@ -28,8 +31,10 @@
             document.body.appendChild(renderer.domElement);
 
             const loader = new THREE.GLTFLoader(); // Use GLTFLoader for .glb files
-            loader.load(scene.gltf, function (gltf) {
+            loader.load(scene.gltf, function (gltf) { // Replace 'path/to/your/model.glb' with the correct path to your model
                 scene.add(gltf.scene);
+            }, undefined, function (error) {
+                console.error("Error loading GLTF:", error);
             });
 
             controls = new THREE.OrbitControls(camera, renderer.domElement);
