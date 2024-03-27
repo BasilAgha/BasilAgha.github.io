@@ -10,12 +10,8 @@
     </style>
 </head>
 <body>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-    <script src="OrbitControls.js"></script>
-    <script src="GLTFLoader.js"></script> <!-- Add GLTFLoader script -->
-    <script>
-        console.log("GLTFLoader:", THREE.GLTFLoader); // Check if THREE.GLTFLoader is defined
-        console.log("Type of GLTFLoader:", typeof THREE.GLTFLoader); // Check the type of THREE.GLTFLoader
+    <script type="module">
+        import { GLTFLoader } from GLTFLoader.js; // Adjust the path to GLTFLoader.js
 
         let camera, scene, renderer;
         let controls;
@@ -30,7 +26,7 @@
             renderer.setSize(window.innerWidth, window.innerHeight);
             document.body.appendChild(renderer.domElement);
 
-            const loader = new THREE.GLTFLoader(); // Use GLTFLoader for .glb files
+            const loader = new GLTFLoader(); // Use GLTFLoader for .glb files
             loader.load(scene.gltf, function (gltf) { // Replace 'path/to/your/model.glb' with the correct path to your model
                 scene.add(gltf.scene);
             }, undefined, function (error) {
