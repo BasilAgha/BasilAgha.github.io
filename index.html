@@ -1,39 +1,76 @@
-<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/build/three.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/three/examples/js/loaders/GLTFLoader.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/three/examples/js/controls/OrbitControls.js"></script>
-<script>
-    let camera, scene, renderer;
-    let controls;
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Three.js Custom Model</title>
+    <style>
+        body { margin: 0; }
+        canvas { display: block; }
+        .button-container {
+            position: relative;
+            width: 100px; /* Adjust container width as needed */
+            height: 100px; /* Adjust container height as needed */
+            overflow: hidden;
+        }
+        #openSceneButton {
+            width: 100%; /* Ensure button fills container */
+            height: 100%; /* Ensure button fills container */
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="button-container">
+        <img id="openSceneButton" src="ButtonImage.png" alt="Open Scene">
+    </div>
 
-    function init() {
-        scene = new THREE.Scene();
-        camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-        camera.position.z = 5;
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three/examples/js/loaders/GLTFLoader.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three/examples/js/controls/OrbitControls.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            let camera, scene, renderer;
+            let controls;
 
-        renderer = new THREE.WebGLRenderer();
-        renderer.setSize(window.innerWidth, window.innerHeight);
-        document.body.appendChild(renderer.domElement);
+            function init() {
+                scene = new THREE.Scene();
+                camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+                camera.position.z = 5;
 
-        scene.background = new THREE.Color(0xffffff);
+                renderer = new THREE.WebGLRenderer();
+                renderer.setSize(window.innerWidth, window.innerHeight);
+                document.body.appendChild(renderer.domElement);
 
-        const loader = new THREE.GLTFLoader();
-        loader.load(scene.gltf, function(gltf) {
-            scene.add(gltf.scene);
-            render(); // You might want to call render() here to ensure the scene is rendered after the model loads
-        }, undefined, function(error) {
-            console.error(error);
+                scene.background = new THREE.Color(0xffffff);
+
+                const loader = new THREE.GLTFLoader();
+                loader.load(scene.gltf, function(gltf) {
+                    scene.add(gltf.scene);
+                }, undefined, function(error) {
+                    console.error(error);
+                });
+
+                controls = new THREE.OrbitControls(camera, renderer.domElement);
+                controls.addEventListener('change', render);
+            }
+
+            function render() {
+                renderer.render(scene, camera);
+            }
+
+            const openSceneButton = document.getElementById('openSceneButton');
+            if (openSceneButton) {
+                openSceneButton.addEventListener('click', function() {
+                    init();
+                    render();
+                });
+            } else {
+                console.error('Button with ID "openSceneButton" not found.');
+            }
         });
-
-        controls = new THREE.OrbitControls(camera, renderer.domElement);
-        controls.addEventListener('change', render);
-    }
-
-    function render() {
-        renderer.render(scene, camera);
-    }
-
-    document.getElementById("openSceneButton").addEventListener("click", function() {
-        init(); // Initialize the scene
-        render(); // Render the scene
-    });
-</script>
+    </script>
+</body>
+</html>
