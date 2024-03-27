@@ -3,97 +3,85 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
-    <title>Three.js Cube</title>
+    <title>Three.js Fullscreen Cube</title>
     <style>
         body { margin: 0; }
         canvas { display: block; }
         .button-container {
-            width: 100px; /* Adjust container width as needed */
-            height: 100px; /* Adjust container height as needed */
-            overflow: hidden;
-            position: relative;
+            position: fixed; /* Ensure button is easily clickable */
+            z-index: 10; /* Make sure the button is above other elements */
+            right: 10px; /* Position it on the right */
+            top: 10px; /* Position it at the top */
         }
-        #openSceneButton {
-            width: 100%; /* Ensure image fills container */
-            height: 100%; /* Ensure image fills container */
-            position: absolute;
-            top: 0;
-            left: 0;
+        #fullscreenButton {
+            cursor: pointer; /* Change cursor to indicate clickable item */
+            width: 50px; /* Set the size of the button */
+            height: 50px;
         }
     </style>
 </head>
 <body>
     <div class="button-container">
-        <img id="openSceneButton" src="ButtonImage.png" alt="Open Scene">
-    </div> <!-- Container for the button image -->
+        <img id="fullscreenButton" src="ButtonImage.png" alt="Full Screen">
+    </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script src="OrbitControls.js"></script>
     <script>
-        // Variables
-        let camera, scene, renderer;
-        let cube;
-        let controls;
+        let camera, scene, renderer, cube, controls;
 
-       // Initialization function
-       function init() {
-    // Usual setup for scene, camera, and renderer
-    scene = new THREE.Scene();
-    camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-    camera.position.z = 5;
-    renderer = new THREE.WebGLRenderer();
-    renderer.setSize(window.innerWidth, window.innerHeight);
-    document.body.appendChild(renderer.domElement);
+        function init() {
+            // Create scene
+            scene = new THREE.Scene();
 
-    // Gradient background using CSS-style color stops
-    const canvas = document.createElement('canvas');
-    canvas.width = 128; // Width and height can be set as needed
-    canvas.height = 128;
-    const context = canvas.getContext('2d');
-    const gradient = context.createLinearGradient(0, 0, 0, 128); // Create a vertical gradient
-    gradient.addColorStop(0, '#1e4877'); // Top color
-    gradient.addColorStop(0.5, '#4584b4'); // Mid color
-    gradient.addColorStop(1, '#000000'); // Bottom color
-    context.fillStyle = gradient;
-    context.fillRect(0, 0, canvas.width, canvas.height);
+            // Create camera
+            camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+            camera.position.z = 5;
 
-    // Apply the gradient as a background
-    scene.background = new THREE.CanvasTexture(canvas);
-    // Create cube
-    const geometry = new THREE.BoxGeometry();
-    const material = new THREE.MeshBasicMaterial({ color: 0xff0000 });
-    cube = new THREE.Mesh(geometry, material);
-    cube.rotation.y = Math.PI / 4; // 45 degrees in radians
-    scene.add(cube);
+            // Create renderer
+            renderer = new THREE.WebGLRenderer();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            document.body.appendChild(renderer.domElement);
 
-    // Add ambient light
-    const ambientLight = new THREE.AmbientLight(0x404040); // soft white light
-    scene.add(ambientLight);
+            // Create a cube
+            const geometry = new THREE.BoxGeometry();
+            const material = new THREE.MeshBasicMaterial({color: 0xff0000});
+            cube = new THREE.Mesh(geometry, material);
+            scene.add(cube);
 
-    // Add directional light
-    const directionalLight = new THREE.DirectionalLight(0xffffff, 0.5);
-    directionalLight.position.set(1, 1, 1); // Position the light
-    scene.add(directionalLight);
+            // Add orbit controls
+            controls = new THREE.OrbitControls(camera, renderer.domElement);
+            controls.addEventListener('change', render);
 
-    // Add controls
-    controls = new THREE.OrbitControls(camera, renderer.domElement);
-    controls.addEventListener('change', render); // Listen for control changes
-}
+            // Render function
+            function render() {
+                renderer.render(scene, camera);
+            }
 
-        // Render function
-        function render() {
-            // Render the scene
-            renderer.render(scene, camera);
+            // Initialize scene and render once
+            render();
         }
 
-        // Open scene function
-        function openScene() {
-            init(); // Initialize the scene
-            render(); // Render the scene
-        }
+        // Full-screen toggle function
+        document.getElementById('fullscreenButton').addEventListener('click', function() {
+            if (!document.fullscreenElement) {
+                document.documentElement.requestFullscreen();
+            } else {
+                if (document.exitFullscreen) {
+                    document.exitFullscreen();
+                }
+            }
+        });
 
-        // Add event listener to the image
-        document.getElementById("openSceneButton").addEventListener("click", openScene);
+        // Resize event listener
+        window.addEventListener('resize', function() {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            render(); // Re-render the scene after resizing
+        });
 
+        // Call the init function to set everything up
+        init();
     </script>
 </body>
 </html>
