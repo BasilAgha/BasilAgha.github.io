@@ -59,12 +59,12 @@
             const geometry = new THREE.BoxGeometry();
             const material = new THREE.MeshBasicMaterial({ color: 0xff0000 });
             cube = new THREE.Mesh(geometry, material);
-            cube.rotation.y = Math.PI / 4; // 45 degrees in radians
+            cube.rotation.y = Math.PI / 4; // Set initial rotation of the cube
             scene.add(cube);
 
             // Add controls
             controls = new THREE.OrbitControls(camera, renderer.domElement);
-            controls.addEventListener('change', render); // Listen for control changes
+            controls.addEventListener('change', render); // Update the scene on control changes
         }
 
         // Render function
@@ -79,18 +79,26 @@
 
         // Setup camera background
         async function setupCameraBackground() {
-            const stream = await navigator.mediaDevices.getUserMedia({ video: true });
-            const video = document.getElementById('video');
-            video.srcObject = stream;
-            await video.play();
-            const texture = new THREE.VideoTexture(video);
-            texture.minFilter = THREE.LinearFilter;
-            texture.magFilter = THREE.LinearFilter;
-            texture.format = THREE.RGBFormat;
-            scene.background = texture;
+            try {
+                const constraints = {
+                    video: { facingMode: "environment" } // Preference for rear camera
+                };
+                const stream = await navigator.mediaDevices.getUserMedia(constraints);
+                const video = document.getElementById('video');
+                video.srcObject = stream;
+                await video.play();
+                const texture = new THREE.VideoTexture(video);
+                texture.minFilter = THREE.LinearFilter;
+                texture.magFilter = THREE.LinearFilter;
+                texture.format = THREE.RGBFormat;
+                scene.background = texture;
+            } catch (error) {
+                console.error('Error accessing the camera', error);
+                // Implement any fallback logic here, e.g., setting a default background
+            }
         }
 
-        // Add event listener to the image
+        // Add event listener to the image for opening the scene
         document.getElementById("openSceneButton").addEventListener("click", openScene);
     </script>
 </body>
