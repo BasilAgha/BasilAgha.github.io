@@ -2,7 +2,6 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
     <title>Three.js GLTF Model</title>
     <style>
         body { margin: 0; }
@@ -10,10 +9,11 @@
     </style>
 </head>
 <body>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-    <script src="GLTFLoader.js"></script>
-    <script src="OrbitControls.js"></script>
-    <script>
+    <script type="module">
+        import * as THREE from 'https://unpkg.com/three@0.128.0/build/three.module.js';
+        import { GLTFLoader } from './GLTFLoader.js';
+        import { OrbitControls } from './OrbitControls.js';
+
         let camera, scene, renderer;
         let controls;
 
@@ -29,22 +29,28 @@
             renderer.setSize(window.innerWidth, window.innerHeight);
             document.body.appendChild(renderer.domElement);
 
-            const ambientLight = new THREE.AmbientLight(0x404040); // soft white light
+            // Lighting
+            const ambientLight = new THREE.AmbientLight(0xcccccc, 0.4);
             scene.add(ambientLight);
-
-            const directionalLight = new THREE.DirectionalLight(0xffffff, 0.5);
-            directionalLight.position.set(1, 1, 1);
+            const directionalLight = new THREE.DirectionalLight(0xffffff, 0.8);
+            directionalLight.position.set(1, 1, 0).normalize();
             scene.add(directionalLight);
 
-            const loader = new THREE.GLTFLoader();
+            // GLTF Loader
+            const loader = new GLTFLoader();
             loader.load('https://threejs.org/examples/models/gltf/Duck/glTF/Duck.gltf', function(gltf) {
                 scene.add(gltf.scene);
             }, undefined, function(error) {
                 console.error(error);
             });
 
-            controls = new THREE.OrbitControls(camera, renderer.domElement);
-            controls.addEventListener('change', render);
+            // Orbit Controls
+            controls = new OrbitControls(camera, renderer.domElement);
+            controls.addEventListener('change', render); // use if there is no animation loop
+            controls.minDistance = 2;
+            controls.maxDistance = 10;
+            controls.target.set(0, 0, - 0.2);
+            controls.update();
 
             window.addEventListener('resize', onWindowResize, false);
         }
@@ -58,7 +64,7 @@
 
         function animate() {
             requestAnimationFrame(animate);
-            controls.update();
+            controls.update(); // only required if controls.enableDamping = true, or if controls.autoRotate = true
             render();
         }
 
