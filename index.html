@@ -2,31 +2,591 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Button Page</title>
-    <style>
-        .button-container {
-            width: 100px; /* Adjust container width as needed */
-            height: 100px; /* Adjust container height as needed */
-            overflow: hidden;
-            position: relative;
-            margin: 20px; /* Add margin for better placement */
-        }
-        #openSceneButton {
-            width: 100%; /* Ensure image fills container */
-            height: 100%; /* Ensure image fills container */
-            position: absolute;
-            top: 0;
-            left: 0;
-            cursor: pointer; /* Change cursor on hover to indicate clickable */
-        }
-    </style>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ali Sayegh Contracting Company W.L.L. - ASCC</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
-    <div class="button-container">
-        <!-- When this image is clicked, navigate to the Three.js page -->
-        <a href="threejsPage.html">
-            <img id="openSceneButton" src="ButtonImage.png" alt="Open Scene">
-        </a>
-    </div>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <h2>ASCC</h2>
+                <span>Ali Sayegh Contracting Co.</span>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="#home">Home</a></li>
+                <li class="dropdown">
+                    <a href="#about">About Us <i class="fas fa-chevron-down"></i></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#about">Who We Are</a></li>
+                        <li><a href="#about">Company Profile</a></li>
+                        <li><a href="#about">Heritage</a></li>
+                        <li><a href="#about">Executive Message</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="#services">Activities <i class="fas fa-chevron-down"></i></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#services">Services</a></li>
+                        <li><a href="#clients">Clients</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="#projects">Projects <i class="fas fa-chevron-down"></i></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#projects">Sample Projects</a></li>
+                        <li><a href="#projects">Complete Projects</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="#careers">Careers <i class="fas fa-chevron-down"></i></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#careers">Why Work With ASCC</a></li>
+                        <li><a href="#careers">Apply Now</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="#news">News & Media <i class="fas fa-chevron-down"></i></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#news">NEWS & Events</a></li>
+                        <li><a href="#news">Gallery</a></li>
+                    </ul>
+                </li>
+                <li><a href="#contact">Contact Us</a></li>
+                <li><a href="#" class="lang-btn">عربى</a></li>
+            </ul>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-slider">
+            <div class="slide active">
+                <div class="slide-content">
+                    <h1>Ali Sayegh Contracting Company W.L.L.</h1>
+                    <p>ASCC has always been dedicated to its objective of providing high quality performance, implementing efficient cost-effective methods, being responsive to client's needs, and building a long trustworthy relationship.</p>
+                    <a href="#about" class="cta-btn">DISCOVER</a>
+                </div>
+            </div>
+            <div class="slide">
+                <div class="slide-content">
+                    <h1>Design, Construction and Maintenance</h1>
+                    <p>ASCC has always been dedicated to its objective of providing high quality performance, implementing efficient cost-effective methods, being responsive to client's needs, and building a long trustworthy relationship.</p>
+                    <a href="#services" class="cta-btn">DISCOVER</a>
+                </div>
+            </div>
+            <div class="slide">
+                <div class="slide-content">
+                    <h1>Civil & Industrial Construction</h1>
+                    <p>ASCC has always been dedicated to its objective of providing high quality performance, implementing efficient cost-effective methods, being responsive to client's needs, and building a long trustworthy relationship.</p>
+                    <a href="#projects" class="cta-btn">DISCOVER</a>
+                </div>
+            </div>
+        </div>
+        <div class="hero-controls">
+            <button class="prev-btn"><i class="fas fa-chevron-left"></i></button>
+            <button class="next-btn"><i class="fas fa-chevron-right"></i></button>
+        </div>
+        <div class="hero-indicators">
+            <span class="indicator active" data-slide="0"></span>
+            <span class="indicator" data-slide="1"></span>
+            <span class="indicator" data-slide="2"></span>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section class="experience">
+        <div class="container">
+            <div class="experience-content">
+                <div class="experience-text">
+                    <h2>since</h2>
+                    <h1>1953</h1>
+                    <p>years<br>experience</p>
+                </div>
+                <div class="experience-description">
+                    <p>Ali Sayegh Contracting Company W.L.L. (ASCC) is a Kuwaiti civil contracting firm holding its main offices at Kuwait City & Al-Ahmadi industrial area, where it was founded in 1953.</p>
+                    <p>The company is registered in the Central Tender Committee (CTC) as Category II for both building construction and roads & infrastructure works. In addition, ASCC</p>
+                    <a href="#about" class="learn-more">more about us</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+        <div class="container">
+            <div class="about-grid">
+                <div class="about-card">
+                    <h3>Our Vision</h3>
+                    <p>Our vision is to maintain the company's successful operation & management system and to continue to value the increasing trust of our clients...</p>
+                    <a href="#" class="read-more">Read More</a>
+                </div>
+                <div class="about-card">
+                    <h3>Our Mission</h3>
+                    <p>Our mission is to provide optimum value to our clients with the commitment of quality, time and cost efficiency control, giving them a total experience...</p>
+                    <a href="#" class="read-more">Read More</a>
+                </div>
+                <div class="about-card">
+                    <h3>Our Goals</h3>
+                    <p>Our Goals To provide the highest level of service in the construction industry while offering superior craftsmanship to every project, we handle.</p>
+                    <a href="#" class="read-more">Read More</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="services">
+        <div class="container">
+            <div class="section-header">
+                <h4>What We Do</h4>
+                <h2>Our Services</h2>
+            </div>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-bolt"></i>
+                    </div>
+                    <h3>POWER & ENERGY</h3>
+                    <p>Comprehensive power generation, transmission, and distribution infrastructure solutions with cutting-edge technology and sustainable practices.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-road"></i>
+                    </div>
+                    <h3>Roads & Infrastructure Works</h3>
+                    <p>Expert road construction, maintenance, and infrastructure development services ensuring durable and efficient transportation networks.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-futbol"></i>
+                    </div>
+                    <h3>Sport Facilities</h3>
+                    <p>State-of-the-art sports facility construction including stadiums, recreational centers, and specialized sporting venues.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-building"></i>
+                    </div>
+                    <h3>Buildings</h3>
+                    <p>Commercial, residential, and institutional building construction with focus on quality, safety, and innovative design solutions.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3>Military Facilities</h3>
+                    <p>Specialized construction services for military installations, defense infrastructure, and security-related building projects.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-home"></i>
+                    </div>
+                    <h3>Housing</h3>
+                    <p>Residential housing development including single-family homes, apartments, and large-scale housing communities.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="projects">
+        <div class="container">
+            <div class="section-header">
+                <h4>Our Projects</h4>
+                <h2>ASCC Projects</h2>
+            </div>
+            <div class="projects-grid">
+                <div class="project-card">
+                    <div class="project-image">
+                        <img src="https://images.unsplash.com/photo-1581094794329-c8112a89af12?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="Defense System">
+                    </div>
+                    <div class="project-info">
+                        <h3>IMPROVED HAWK AIR BASE DEFENCE SYSTEM</h3>
+                        <h4>KUWAIT</h4>
+                        <span class="project-category">MILITARY FACILITIES</span>
+                        <div class="project-details">
+                            <p><strong>PROJECT NAME:</strong> Civil Works And Infrastructure Of The Air Base Defense System</p>
+                            <p><strong>LOCATION:</strong> KUWAIT</p>
+                            <p><strong>CLIENT:</strong> MINISTRY OF DEFENSE</p>
+                            <p><strong>CONTRACT NO:</strong> MDED/C/60-77/78</p>
+                            <p><strong>DATE OF COMPLETION:</strong> 1981</p>
+                        </div>
+                        <a href="#" class="project-btn">DISCOVER PROJECT</a>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="project-image">
+                        <img src="https://images.unsplash.com/photo-1540979388789-6cee28a1cdc9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="Airport">
+                    </div>
+                    <div class="project-info">
+                        <h3>D.G.C.A Construction and maintenance of Kuwait International Airport Runways</h3>
+                        <h4>KUWAIT - AIRPORT</h4>
+                        <span class="project-category">ROADS & INFRASTRUCTURE WORK</span>
+                        <div class="project-details">
+                            <p><strong>PROJECT NAME:</strong> D.G.C.A Construction and maintenance of Kuwait International Airport Runways</p>
+                            <p><strong>LOCATION:</strong> KUWAIT - AIRPORT</p>
+                            <p><strong>CLIENT:</strong> Civil Aviation Directorate General of Civil Aviation</p>
+                            <p><strong>CONTRACT NO:</strong> DGCA/CM/1</p>
+                            <p><strong>DATE OF COMPLETION:</strong> 1978</p>
+                        </div>
+                        <a href="#" class="project-btn">DISCOVER PROJECT</a>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="project-image">
+                        <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="Power Station">
+                    </div>
+                    <div class="project-info">
+                        <h3>JAHRA DISTRICT CONTROL CENTRE</h3>
+                        <h4>KUWAIT - JAHRA</h4>
+                        <span class="project-category">POWER & ENERGY</span>
+                        <div class="project-details">
+                            <p><strong>PROJECT NAME:</strong> JAHRA DISTRICT CONTROL CENTRE</p>
+                            <p><strong>LOCATION:</strong> KUWAIT - JAHRA</p>
+                            <p><strong>CLIENT:</strong> M.E.W. COGELEX ALSTHOM</p>
+                            <p><strong>CONTRACT NO:</strong> ENP-C/1960-87/88</p>
+                            <p><strong>DATE OF COMPLETION:</strong> 1993</p>
+                        </div>
+                        <a href="#" class="project-btn">DISCOVER PROJECT</a>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="project-image">
+                        <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="Substation">
+                    </div>
+                    <div class="project-info">
+                        <h3>AL-ZOUR LOT 1 A& 400 KV SUB-STATION</h3>
+                        <h4>KUWAIT - ZOOR</h4>
+                        <span class="project-category">POWER & ENERGY</span>
+                        <div class="project-details">
+                            <p><strong>PROJECT NAME:</strong> AL-ZOUR LOT 1 A& 400 KV SUB-STATION</p>
+                            <p><strong>LOCATION:</strong> KUWAIT - ZOOR</p>
+                            <p><strong>CLIENT:</strong> M.E.W. A.B.B. ENGINEERING TECHNOLOGIES COMPANY</p>
+                            <p><strong>CONTRACT NO:</strong> GCC INTERCONNECTION /502937</p>
+                            <p><strong>DATE OF COMPLETION:</strong> 2009</p>
+                        </div>
+                        <a href="#" class="project-btn">DISCOVER PROJECT</a>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="project-image">
+                        <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="Housing">
+                    </div>
+                    <div class="project-info">
+                        <h3>HADIYA HOUSING PROJECT</h3>
+                        <h4>KUWAIT - HADIYA</h4>
+                        <span class="project-category">HOUSING</span>
+                        <div class="project-details">
+                            <p><strong>PROJECT NAME:</strong> HADIYA HOUSING PROJECT</p>
+                            <p><strong>LOCATION:</strong> KUWAIT - HADIYA</p>
+                            <p><strong>CLIENT:</strong> Public Authority For Housing Welfare</p>
+                            <p><strong>CONTRACT NO:</strong> NHA/C/60-77/78</p>
+                            <p><strong>DATE OF COMPLETION:</strong> 1981</p>
+                        </div>
+                        <a href="#" class="project-btn">DISCOVER PROJECT</a>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="project-image">
+                        <img src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="Substation">
+                    </div>
+                    <div class="project-info">
+                        <h3>CONSTRUCTION OF 300/400 KV SUB-STATIONS AT AL-ZOUR "Z"</h3>
+                        <h4>KUWAIT - AL-ZOUR</h4>
+                        <span class="project-category">POWER & ENERGY</span>
+                        <div class="project-details">
+                            <p><strong>PROJECT NAME:</strong> CONSTRUCTION OF 300/400 KV SUB-STATIONS AT AL-ZOUR "Z"</p>
+                            <p><strong>LOCATION:</strong> KUWAIT - AL-ZOUR</p>
+                            <p><strong>CLIENT:</strong> MEW TOSHIBA CO.</p>
+                            <p><strong>CONTRACT NO:</strong> MEW/C/4512-2012/2013</p>
+                            <p><strong>DATE OF COMPLETION:</strong> 2014</p>
+                        </div>
+                        <a href="#" class="project-btn">DISCOVER PROJECT</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- News Section -->
+    <section id="news" class="news">
+        <div class="container">
+            <div class="section-header">
+                <h4>Our Recent news</h4>
+                <h2>Latest News & Events</h2>
+            </div>
+            <div class="news-grid">
+                <div class="news-card">
+                    <div class="news-date">
+                        <span>April 2022</span>
+                    </div>
+                    <div class="news-image">
+                        <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="Contract Signing">
+                    </div>
+                    <div class="news-content">
+                        <h3>The signing of Contract No. WKM/C/5659 - 2022-2021 for the project of construction and installation of a 300 K.V main conversion station at Al-Sabah Hospital "W"</h3>
+                    </div>
+                </div>
+                <div class="news-card">
+                    <div class="news-date">
+                        <span>2006</span>
+                    </div>
+                    <div class="news-image">
+                        <img src="https://images.unsplash.com/photo-1560472354-b33ff0c44a43?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="Project Completion">
+                    </div>
+                    <div class="news-content">
+                        <h3>The signing of Contract No. 502937 for the Gulf Connection Station Project in Al-Zour Area</h3>
+                    </div>
+                </div>
+                <div class="news-card">
+                    <div class="news-date">
+                        <span>1997</span>
+                    </div>
+                    <div class="news-image">
+                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="Celebration">
+                    </div>
+                    <div class="news-content">
+                        <h3>Celebration of the end of the contract works No. C/1186-94-95 for the supply and installation of the main conversion station 33/11 kV. transmitter "N" in the Mutlaa area.</h3>
+                    </div>
+                </div>
+                <div class="news-card">
+                    <div class="news-date">
+                        <span>1993</span>
+                    </div>
+                    <div class="news-image">
+                        <img src="https://images.unsplash.com/photo-1521791136064-7986c2920216?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="Project Completion">
+                    </div>
+                    <div class="news-content">
+                        <h3>Celebrating the end of the contract works No. C/1960-87-88 for the Jahra Sub-Control Center project.</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Clients Section -->
+    <section id="clients" class="clients">
+        <div class="container">
+            <div class="section-header">
+                <h4>Our Clients</h4>
+                <h2>Our Clients</h2>
+            </div>
+            <div class="clients-grid">
+                <div class="client-logo">
+                    <img src="https://via.placeholder.com/150x80/cccccc/666666?text=CLIENT+1" alt="Client 1">
+                </div>
+                <div class="client-logo">
+                    <img src="https://via.placeholder.com/150x80/cccccc/666666?text=CLIENT+2" alt="Client 2">
+                </div>
+                <div class="client-logo">
+                    <img src="https://via.placeholder.com/150x80/cccccc/666666?text=CLIENT+3" alt="Client 3">
+                </div>
+                <div class="client-logo">
+                    <img src="https://via.placeholder.com/150x80/cccccc/666666?text=CLIENT+4" alt="Client 4">
+                </div>
+                <div class="client-logo">
+                    <img src="https://via.placeholder.com/150x80/cccccc/666666?text=CLIENT+5" alt="Client 5">
+                </div>
+                <div class="client-logo">
+                    <img src="https://via.placeholder.com/150x80/cccccc/666666?text=CLIENT+6" alt="Client 6">
+                </div>
+                <div class="client-logo">
+                    <img src="https://via.placeholder.com/150x80/cccccc/666666?text=CLIENT+7" alt="Client 7">
+                </div>
+                <div class="client-logo">
+                    <img src="https://via.placeholder.com/150x80/cccccc/666666?text=CLIENT+8" alt="Client 8">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Careers Section -->
+    <section id="careers" class="careers">
+        <div class="container">
+            <div class="section-header">
+                <h4>Join Our Team</h4>
+                <h2>Careers at ASCC</h2>
+            </div>
+            <div class="careers-content">
+                <div class="careers-info">
+                    <div class="career-intro">
+                        <h3>Why Work With ASCC</h3>
+                        <p>At Ali Sayegh Contracting Company, we believe our people are our greatest asset. We offer a dynamic work environment where innovation, excellence, and professional growth are encouraged and rewarded.</p>
+                        <ul>
+                            <li><i class="fas fa-check"></i> Competitive compensation and benefits</li>
+                            <li><i class="fas fa-check"></i> Professional development opportunities</li>
+                            <li><i class="fas fa-check"></i> Collaborative team environment</li>
+                            <li><i class="fas fa-check"></i> Career advancement opportunities</li>
+                            <li><i class="fas fa-check"></i> Work-life balance</li>
+                            <li><i class="fas fa-check"></i> Comprehensive training programs</li>
+                        </ul>
+                    </div>
+                    <div class="career-openings">
+                        <h3>Current Openings</h3>
+                        <div class="job-listing">
+                            <div class="job-card">
+                                <h4>Senior Civil Engineer</h4>
+                                <p><i class="fas fa-map-marker-alt"></i> Kuwait City</p>
+                                <p><i class="fas fa-briefcase"></i> Full-time</p>
+                                <p>Lead infrastructure projects and manage construction teams for major developments.</p>
+                                <a href="#" class="apply-btn">Apply Now</a>
+                            </div>
+                            <div class="job-card">
+                                <h4>Project Manager</h4>
+                                <p><i class="fas fa-map-marker-alt"></i> Al-Ahmadi</p>
+                                <p><i class="fas fa-briefcase"></i> Full-time</p>
+                                <p>Oversee project execution, timeline management, and client relations.</p>
+                                <a href="#" class="apply-btn">Apply Now</a>
+                            </div>
+                            <div class="job-card">
+                                <h4>Electrical Engineer</h4>
+                                <p><i class="fas fa-map-marker-alt"></i> Kuwait City</p>
+                                <p><i class="fas fa-briefcase"></i> Full-time</p>
+                                <p>Design and implement electrical systems for power and infrastructure projects.</p>
+                                <a href="#" class="apply-btn">Apply Now</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="application-form">
+                    <h3>Apply Now</h3>
+                    <form>
+                        <div class="form-group">
+                            <input type="text" placeholder="Full Name" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="email" placeholder="Email Address" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="tel" placeholder="Phone Number" required>
+                        </div>
+                        <div class="form-group">
+                            <select required>
+                                <option value="">Select Position</option>
+                                <option value="civil-engineer">Senior Civil Engineer</option>
+                                <option value="project-manager">Project Manager</option>
+                                <option value="electrical-engineer">Electrical Engineer</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <textarea placeholder="Cover Letter / Why do you want to work with us?" rows="4" required></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="resume">Upload Resume (PDF only)</label>
+                            <input type="file" id="resume" accept=".pdf" required>
+                        </div>
+                        <button type="submit" class="submit-btn">Submit Application</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <div class="contact-content">
+                <div class="contact-info">
+                    <h3>Contact Us</h3>
+                    <div class="contact-item">
+                        <h4>Head Office:</h4>
+                        <p>Qibla - Block 13 - Sour St – Building No. 20<br>
+                        Al-Sour Tower – Second Floor - PACI NO. 90013488</p>
+                    </div>
+                    <div class="contact-item">
+                        <h4>Branch Office:</h4>
+                        <p>Ahmadi, East Ahmadi, Block 8, Street 342, Building 35.</p>
+                    </div>
+                    <div class="contact-item">
+                        <h4>Email:</h4>
+                        <p>info@alisayegh.com</p>
+                    </div>
+                    <div class="contact-item">
+                        <h4>Phone:</h4>
+                        <p>+965 22421681 / 9<br>
+                        +965 22410874</p>
+                    </div>
+                </div>
+                <div class="contact-form">
+                    <h3>Get In Touch</h3>
+                    <form>
+                        <div class="form-group">
+                            <input type="text" placeholder="Your Name" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="email" placeholder="Your Email" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" placeholder="Subject" required>
+                        </div>
+                        <div class="form-group">
+                            <textarea placeholder="Your Message" rows="5" required></textarea>
+                        </div>
+                        <button type="submit" class="submit-btn">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Ali Sayegh Contracting Co.</h3>
+                    <p>ASCC has always been dedicated to its objective of providing high quality performance, implementing efficient cost-effective methods, being responsive to client's needs, and building a long trustworthy relationship.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#about">About Us</a></li>
+                        <li><a href="#services">Services</a></li>
+                        <li><a href="#clients">Clients</a></li>
+                        <li><a href="#careers">Careers</a></li>
+                        <li><a href="#projects">Projects</a></li>
+                        <li><a href="#news">News & Events</a></li>
+                        <li><a href="#contact">Contact Us</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Services</h4>
+                    <ul>
+                        <li><a href="#">Power & Energy</a></li>
+                        <li><a href="#">Roads & Infrastructure</a></li>
+                        <li><a href="#">Sport Facilities</a></li>
+                        <li><a href="#">Buildings</a></li>
+                        <li><a href="#">Military Facilities</a></li>
+                        <li><a href="#">Housing</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Follow Us</h4>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Ali Sayegh Contracting Co. All rights reserved. | Powered by Modern Web Solutions</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
 </body>
 </html>
